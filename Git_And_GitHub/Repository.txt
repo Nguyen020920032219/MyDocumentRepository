@@ -1,0 +1,87 @@
+----------Repository----------
+
+--repository(repo): kho lưu trữ.
+
+--commit: một đơn vị làm việc.
+
+--branch: nhánh.
+
+--main/master: tên của repo chính(main repo).
+
+--merge/rebase: kết hợp các nhánh lại với nhau.
+
+--develop: tên của nhánh hoặc lập trình viên.
+
+--"git --help": hiển thị ra trợ giúp/hướng dẫn.
+
+--"git --version": hiển thị thông tin phiên bản git.
+
+--"git status": hiển thị trạng thái kho lưu trữ.
+
+--"git log": hiển thi lịch sử commit.
+
+--"git init [repo name]": tạo ra một kho lưu trữ.
+
+--"git clone [repo name] [clone name]": tạo ra một bản sao được liên kết với repo.
+
+--"git config -l": xem cấu hình hiện tại.
+
+--"git config [scope] [option name] [value]": 
+	scope: 	--system: ảnh hưởng tất cả người dùng hện thống.
+		--global: ảnh hưởng đến nhiều repo của người dùng.
+		--local: ảnh hưởng đến một repo của người dùng.
+	option name: 	user.name: tên người dùng.
+			user.email: email người dùng.
+
+--"git add [fileName(s)]": thêm tệp vào index(staging area). "git add .add": thêm tất cả các tệp vào index.
+
+--"git commit -m [content]": tạo commit đưa dữ liệu vào repo.
+
+--"git status": sự khác biệt giữa 3 cây(working directory, index(staging area), head(repository)).
+
+--"git diff": so sánh với commit cuối cùng.
+
+--"git log": xem lịch sửa làm việc.
+
+--"echo/touch .gitignore": tạo ra file gitignore.
+	"*.log": để chặn tất cả file log.
+	"folderName/": chặn folder có tên đã nhập.
+	"fileName": chặn file có tên đã nhập.
+
+--"git init --bare": tạo một central repo.
+
+--"git clone [repoName] [cloneName]": sao chép và liên kết repo.
+
+--"git fetch": lấy thông tin về commit mới từ central.
+
+--"git pull": lấy dữ liệu từ central về local repo.
+
+--"git push": đấy các commit từ local về central.
+
+--"git checkout [branchName(commitHash)]": chuyển nhánh.
+
+--"git branch [branchName]": tạo nhánh.
+
+--"git branch -l": xem danh sách nhánh hiện tại.
+
+--"git merge [branchName]": gộp các nhánh lại với nhau.
+
+--"git rebase [branchName/--continue/--skip]": tái cơ sở cho nhánh đang đứng. --continue để tiếp tục áp dụng các thay đổi từ git rebase. --skip để bỏ qua các thay đổi.
+
+--"git branch -d [branchName]": xóa nhánh trong local.
+
+--"git push origin -d [branchName]": xóa nhánh trong central.
+
+--"git reset [option] [commitHash]": Di chuyển Head về vị trí commit.
+	option:	--soft: giữ thay đổi của file, giữ thay đổi của stage.
+		--mixed(or nothing): giữ thay đổi của file, loại bỏ thay đổi của stage.
+		--hard: loại bỏ thay đổi của file, loại bỏ thay đổi của stage.
+
+--"git revert": trở về phiên làm việc trước đó.
+
+--"git remote add origin [linkGitHubRepository]": liên kết repo trên máy và repo github.
+
+--"git remote add newUpstream [link]": để theo dõi xem repo gốc có thay đổi gì hay không.
+
+--"fork": copy toàn bộ repo của người khác về tài khoản của mình.
+		 

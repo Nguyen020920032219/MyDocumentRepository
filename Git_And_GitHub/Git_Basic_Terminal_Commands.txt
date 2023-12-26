@@ -1,0 +1,27 @@
+-----Git Basic Terminal Commands-----
+
+--cd: change directory - thay đổi thư mục. 
+	"cd .." - đi vào thư mục cha. 
+	"cd 'folderName'" - để đi vào thư mục con.
+
+--dir(hoặc ls): hiển thị danh sách tập tin/thư mục bên trong thư mục hiện hành.
+
+--mkdir "folderName": tạo ra một thư mục mới.
+
+--touch "fileName": tạo ra một tập tin mới.
+ 
+-echo: in/xuất một nội dung. 
+	">" chỉ định hướng/nơi để in/xuất dữ liệu. 
+	"echo 'text' > 'fileName'" - để ghi đè dữ liệu vào file (overWrite). 
+	"echo 'text' >> 'fileName'" - ghi dữ liệu vào file nhưng trên dòng mới (newLine). 
+	"echo > 'newFileName'" - tạo ra file trống mới. 
+	"echo 'text' > 'newFileName'" - tạo ra file có chứa text.
+
+--cat: hiển thị nội dung trong file ra màn hình git bash.
+
+--diff 'file1' 'file2': so sánh sự khác biệt giữa 2 file.
+
+--rm(remove): xóa thư mục hoặc tập tin.
+	"rm 'fileName'" - để xóa một tập tin. 
+	"rm -d 'folderName'" - để xóa thư mục rỗng.
+	"rm -r 'folderName'" - để xóa thư mục có dữ liệu.
