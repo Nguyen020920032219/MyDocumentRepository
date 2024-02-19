@@ -30,7 +30,7 @@ public class DBHelper implements Serializable {
         Connection con = DriverManager.getConnection(url, "sa", "123456");
         return con;
     }
-
+    //dynamic
     public static Connection getConnection() throws ClassNotFoundException, SQLException, NamingException {
         Connection conn = null;
         Context context = new InitialContext();
