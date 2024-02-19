@@ -6,24 +6,26 @@
 package nguyentd.servlet;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import nguyentd.registration.RegistrationDAO;
 
 /**
  *
  * @author trand
  */
-@WebServlet(name = "DispatchServlet", urlPatterns = {"/DispatchServlet"})
-public class DispatchServlet extends HttpServlet {
+@WebServlet(name = "DeleteAccountServlet", urlPatterns = {"/DeleteAccountServlet"})
+public class DeleteAccountServlet extends HttpServlet {
 
-    private final String LOGIN_PAGE = "login.html";
-    private final String LOGIN_CONTROLLER = "LoginServlet";
-    private final String SEARCH_LASTNAME_CONTROLLER = "SearchLastnameServlet";
-    private final String DELETE_ACCOUNT_CONTROLLER = "DeleteAccountServlet";
+    private final String ERROR_PAGE = "errors.html";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,26 +37,30 @@ public class DispatchServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, NamingException {
         response.setContentType("text/html;charset=UTF-8");
-
-        //1.Which button did user click?
-        String button = request.getParameter("btAction");
-        String url = LOGIN_PAGE;
-
+        //1.get all parameter
+        String username = request.getParameter("pk");
+        String searchValue = request.getParameter("lastSearchValue");
+        String url = ERROR_PAGE;
         try {
-            if (button == null) {//first time and app start up
-                //transfer Login page
-            } else if (button.equals("Login")) {//user click login
-                url = LOGIN_CONTROLLER;
-            } else if (button.equals("Search")) {//user click search
-                url = SEARCH_LASTNAME_CONTROLLER;
-            } else if (button.equals("Delete")) {
-                url = DELETE_ACCOUNT_CONTROLLER;
+            RegistrationDAO dao = new RegistrationDAO();
+
+            boolean result = dao.deleteAccount(username);
+
+            if (result) {
+                //Call previous funtion again using URL Rewrinting technique
+                url = "DispatchServlet"
+                        + "?btAction=Search"
+                        + "&txtSearchValue=" + searchValue;
             }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         } finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            //forward is issues because ...
+            response.sendRedirect(url);
         }
     }
 
@@ -70,7 +76,11 @@ public class DispatchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (NamingException ex) {
+            Logger.getLogger(DeleteAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -84,7 +94,11 @@ public class DispatchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (NamingException ex) {
+            Logger.getLogger(DeleteAccountServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

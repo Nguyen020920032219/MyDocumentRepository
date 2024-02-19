@@ -37,12 +37,17 @@
                     <th>Last Name</th>
                     <th>Password</th>
                     <th>Is Admin</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
                 <%
                     int count = 1;
                     for (RegistrationDTO user : result) {
+                        String urlRewriting = "DispatchServlet"
+                                + "?btAction=Delete"
+                                + "&pk=" + user.getUsername()
+                                + "&lastSearchValue=" + searchValue;
                 %>
                 <tr>
                     <td><%=count++%></td>
@@ -50,6 +55,9 @@
                     <td><%=user.getFullName()%></td>
                     <td><%=user.getPassword()%></td>
                     <td><%=user.getRole()%></td>
+                    <td>
+                        <a href="<%=urlRewriting%>">Delete</a>
+                    </td>
                 </tr>
                 <%
                     }
@@ -67,6 +75,6 @@
         <%
                 }//end result is null
             }//seccond time
-        %>
+%>
     </body>
 </html>

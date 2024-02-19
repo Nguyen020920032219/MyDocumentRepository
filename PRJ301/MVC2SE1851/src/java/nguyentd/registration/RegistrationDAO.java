@@ -115,4 +115,39 @@ public class RegistrationDAO implements Serializable {
             }
         }
     }
+
+    public boolean deleteAccount(String username)
+            throws SQLException, ClassNotFoundException, NamingException {
+        Connection con = null;
+        PreparedStatement stm = null;
+        boolean result = false;
+
+        try {
+            //1. Get connection
+            con = DBHelper.getConnection();
+            if (con != null) {
+                //2. create SQL string
+                String sql = "Delete From Registration "
+                        + "Where username = ?";
+                //3. Create Statement Object
+                stm = con.prepareStatement(sql);
+                stm.setString(1, username);
+                //4. Execute Query
+                int effectRow = stm.executeUpdate();
+                //5. Process Result
+                if (effectRow > 0) {
+                    result = true;
+                }
+            }//username and password have been existed
+        }//Connection has been available
+        finally {
+            if (stm != null) {
+                stm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return result;
+    }
 }
